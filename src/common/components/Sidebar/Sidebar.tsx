@@ -50,7 +50,7 @@ const Sidebar = () => {
                             isSidebarOpen={isOpen}
                             currentLocation={location.pathname}
                             Icon={LogoutIcon}
-                            pathname='logout'
+                            pathname='/logout'
                             title='Logout'
                         />
                     </div>

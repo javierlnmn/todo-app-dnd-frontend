@@ -15,7 +15,7 @@ const Logout: FC = () => {
     useEffect(() => {
         removeStoredUserToken();
 		removeUser();
-        navigate('/login');
+        navigate('/session/login');
     }, []); 
 
     return <LoadingThrobber className='h-screen w-full' />;

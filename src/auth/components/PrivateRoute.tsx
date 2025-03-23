@@ -23,7 +23,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 	return isLoading ? (
 		<LoadingThrobber className="h-screen w-full" />
 	) : !isAuthenticated ? (
-		<Navigate to="/login" />
+		<Navigate to="/session/login" />
 	) :  (
 		children
 	);

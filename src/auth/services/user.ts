@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { LoginFormProps } from "@auth/types/user";
+import { LoginFormProps, SignUpFormProps } from "@auth/types/session";
+import { getStoredUserToken } from "@auth/utils/jwt";
 
 import config from "@/config";
-import { getStoredUserToken } from "../utils/jwt";
 
 
 const { API_BASE_URL } = config;
@@ -12,9 +12,23 @@ export const userLogin = async (formData: LoginFormProps) => {
 
     try {
 
-        const response = await axios.post(`${API_BASE_URL}/users/login/`, formData, { validateStatus: undefined });
+        const response = await axios.post(`${API_BASE_URL}/users/login/`, formData);
         
-        return response;
+        return response.data;
+
+    } catch (error) {
+        throw error;
+    }
+    
+}
+
+export const userSignUp = async (formData: SignUpFormProps) => {
+
+    try {
+
+        const response = await axios.post(`${API_BASE_URL}/users/signup/`, formData);
+        
+        return response.data;
 
     } catch (error) {
         throw error;
