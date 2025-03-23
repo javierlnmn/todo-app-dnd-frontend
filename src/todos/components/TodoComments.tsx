@@ -100,7 +100,7 @@ const TodoComments: FC<TodoCommentsProps> = ({ comments, todoId }) => {
                             <motion.div
                                 layout
                                 key={comment.id}
-                                className={`bg-zinc-200 dark:bg-zinc-700 rounded-2xl p-3 flex flex-col gap-2 max-md:w-11/12 w-8/12
+                                className={`bg-zinc-200/30 dark:bg-zinc-700/40 shadow-md rounded-2xl p-3 flex flex-col gap-2 max-md:w-11/12 w-8/12
                                     ${username === comment.user.username ? 'ml-auto rounded-br-none' : 'mr-auto rounded-bl-none' }
                                 `}
                                 initial={{ opacity: 0, x: 20 }}
