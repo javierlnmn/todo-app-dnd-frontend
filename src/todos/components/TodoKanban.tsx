@@ -22,7 +22,7 @@ const TodoKanban = () => {
     const queryClient = useQueryClient();
 
 	// Todos fetchign
-	const { data: fetchedTodos = [], isPending, } = useQuery<Todo[]>({
+	const { data: fetchedTodos = [], isPending, isError } = useQuery<Todo[]>({
 		queryKey: ["todos"],
 		queryFn: getTodos,
 		retry: false,
@@ -34,8 +34,12 @@ const TodoKanban = () => {
 	useEffect(() => {
 		if (!isPending && fetchedTodos) {
 			setTodos(fetchedTodos);
+		} else if (isError) {
+			toast.error('Oops! An error occured while fetching todos', {
+				className: '!bg-zinc-100 dark:!bg-zinc-800 !text-zinc-800 dark:!text-zinc-200',
+			});
 		}
-	}, [fetchedTodos]);
+	}, [isPending]);
 
 
 	// Todos status updating with mutation

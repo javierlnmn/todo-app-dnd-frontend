@@ -21,7 +21,6 @@ export const getTodos = async () => {
 			headers: {
 				Authorization: userJwt,
 			},
-			validateStatus: undefined
 		});
 
 		return response.data;
