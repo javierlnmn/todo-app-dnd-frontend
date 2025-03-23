@@ -7,6 +7,7 @@ import { useUserStore } from '@auth/stores/userStore';
 import { isOwnerOrAdmin } from '@auth/utils/user';
 
 import { formatDateTime } from '@common/utils/dates';
+import InputField from '@common/components/Forms/InputField';
 
 import { Comment, Todo } from '@todos/types/todos.d';
 import { deleteComment, postComment } from '@todos/services/comments';
@@ -134,15 +135,13 @@ const TodoComments: FC<TodoCommentsProps> = ({ comments, todoId }) => {
                 <p className="font-light opacity-70">There are no comments yet.</p>
             )}
             <form className='flex items-center gap-3 mt-3'>
-                <input
-                    type="text"
-                    id="content"
+                <InputField
+                    type='text'
                     name="content"
-                    value={commentFormData.content}
-                    className="h-12 w-full p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
-                    onChange={handleFieldChange}
                     placeholder="Comment something..."
-                    required
+                    value={commentFormData.content}
+                    onChange={handleFieldChange}
+                    error={false}
                 />
                 <button
                     disabled={isCommentFormValid()}

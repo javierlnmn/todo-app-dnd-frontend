@@ -10,6 +10,8 @@ import { getTodoStatusKey } from "@todos/utils/todos";
 
 import { User } from "@auth/types/user";
 import { getUsersList } from "@auth/services/user";
+import InputField from "@/common/components/Forms/InputField";
+import SelectField from "@/common/components/Forms/SelectField";
 
 
 export interface TodoFormData {
@@ -89,75 +91,73 @@ const TodoForm: FC<TodoFormProps> = ({ todo, onClose }) => {
 				<div className="flex gap-4 items-center max-sm:flex-col">
 					<div className="w-full flex-2 max-lg:flex-3 max-sm:flex-1 flex flex-col items-start gap-1">
 						<label htmlFor="title" className="font-bold">Title *</label>
-						<input
+						<InputField
 							type="text"
 							id="title"
 							name="title"
 							value={formData.title}
-							className="disabled:opacity-50 h-12 w-full p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
 							onChange={handleFieldChange}
 							placeholder="Todo Title"
-							required
+							required={true}
+							error={false}
 						/>
 					</div>
 					<div className="w-full flex-1 max-lg:flex-2 max-sm:flex-1 flex flex-col items-start gap-1">
 						<div className="flex items-center gap-3">
-							<label htmlFor="title" className="font-bold">Assigned user</label>
+							<label htmlFor="assignedTo" className="font-bold">Assigned user</label>
 							{isLoadingUsersList && <LoadingThrobberIcon className="w-4 h-4" />}
 						</div>
-						<select
+						<SelectField
 							disabled={isLoadingUsersList}
 							name="assignedTo"
+							id="assignedTo"
 							value={formData.assignedTo}
 							onChange={handleFieldChange}
-							className="disabled:opacity-50 h-12 w-full p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
-						>
-							<option defaultChecked value={''}>-</option>
-							{usersList.map((user, key) => (
-								<option key={key} value={user.id}>
-									{user.username}
-								</option>
-							))}
-						</select>
+							placeholder="Not assigned"
+							allowEmpty={true}
+							options={usersList.map((user) => ({ label: user.username, value: user.id }))}
+						/>
 					</div>
 				</div>
 
 				<div className="flex flex-col items-start gap-1">
-					<label htmlFor="title" className="font-bold">Description</label>
-					<textarea
+					<label htmlFor="description" className="font-bold">Description</label>
+					<InputField
+						isTextArea={true}
 						name="description"
+						id="description"
 						value={formData.description}
 						onChange={handleFieldChange}
 						placeholder="Todo Description"
-						className="disabled:opacity-50 w-full h-32 p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
+						type="text"
 					/>
 				</div>
 
-
 				<div className="flex gap-4 items-center max-sm:flex-col">
 					<div className="w-full flex-1 flex flex-col items-start gap-1">
-						<label htmlFor="title" className="font-bold">Status *</label>
-						<select
+						<label htmlFor="status" className="font-bold">Status *</label>
+						<SelectField
+							disabled={isLoadingUsersList}
 							name="status"
+							id="status"
 							value={formData.status}
 							onChange={handleFieldChange}
-							className="disabled:opacity-50 h-12 w-full p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
-						>
-							{Object.values(TodoStatus).map((status) => (
-								<option key={status} value={getTodoStatusKey(status as TodoStatus)}>
-									{status}
-								</option>
+							options={Object.values(TodoStatus).map((status) => (
+								{ label: status.toString(), value: getTodoStatusKey(status as TodoStatus) || '' }
 							))}
-						</select>
+						/>
 					</div>
 					<div className="w-full flex-1 flex flex-col items-start gap-1">
-						<label htmlFor="title" className="font-bold">Due date *</label>
-						<input
+						<label htmlFor="dueDate" className="font-bold">Due date *</label>
+						<InputField
 							type="date"
+							id="dueDate"
 							name="dueDate"
 							value={formData.dueDate}
 							onChange={handleFieldChange}
-							className="disabled:opacity-50 h-12 w-full p-3 bg-zinc-100 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all hover:bg-zinc-200/80 focus:bg-zinc-200/80 dark:hover:bg-zinc-600/80 dark:focus:bg-zinc-600/80"
+							placeholder="Due Date"
+							required={true}
+							error={false}
 						/>
 					</div>
 				</div>

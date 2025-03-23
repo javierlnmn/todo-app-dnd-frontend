@@ -39,7 +39,7 @@ const TodoKanban = () => {
 				className: '!bg-zinc-100 dark:!bg-zinc-800 !text-zinc-800 dark:!text-zinc-200',
 			});
 		}
-	}, [isPending]);
+	}, [fetchedTodos, isPending]);
 
 
 	// Todos status updating with mutation

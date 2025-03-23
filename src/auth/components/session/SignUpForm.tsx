@@ -4,6 +4,8 @@ import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { Link } from 'react-router-dom';
 
+import InputField from '@common/components/Forms/InputField';
+
 import { setStoredUserToken } from '@auth/utils/jwt';
 import { SignUpFormFieldErrors, SignUpFormProps } from '@auth/types/session';
 import { userSignUp } from '@auth/services/user';
@@ -43,7 +45,7 @@ const SignUpForm: FC = () => {
         }
     });
 
-    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
@@ -59,43 +61,37 @@ const SignUpForm: FC = () => {
             <h2 className='text-lg font-bold'>Sign up</h2>
             <div className='flex flex-col gap-5 items-center justify-center'>
                 <div className='flex flex-col gap-1 w-full'>
-                    <input
-                        onChange={handleFieldChange}
+                    <InputField
                         name='username'
-                        value={formData.username}
                         type='text'
-                        placeholder='Username or Email'
-                        className={`w-full p-3 bg-zinc-200 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all
-                            ${formFieldErrors.username?.length > 0 ? '!border !border-red-400 dark:!border-red-500 text-red-600 dark:text-red-500' : ''}
-                        `}
+                        placeholder='Username'
+                        onChange={handleFieldChange}
+                        value={formData.username}
+                        error={formFieldErrors.username?.length > 0}
                     />
                     {formFieldErrors.username?.length > 0 && <p className='text-red-500'>{formFieldErrors.username?.join(' ')}</p>}
                 </div>
 
                 <div className='flex flex-col gap-1 w-full'>
-                    <input
-                        onChange={handleFieldChange}
+                    <InputField
                         name='password'
-                        value={formData.password}
                         type='password'
                         placeholder='Password'
-                        className={`w-full p-3 bg-zinc-200 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all
-                            ${formFieldErrors.password?.length > 0 ? '!border !border-red-400 dark:!border-red-500 text-red-600 dark:text-red-500' : ''}
-                        `}
+                        onChange={handleFieldChange}
+                        value={formData.password}
+                        error={formFieldErrors.password?.length > 0}
                     />
                     {formFieldErrors.password?.length > 0 && <p className='text-red-500'>{formFieldErrors.password?.join(' ')}</p>}
                 </div>
 
                 <div className='flex flex-col gap-1 w-full'>
-                    <input
-                        onChange={handleFieldChange}
+                    <InputField
                         name='confirmPassword'
-                        value={formData.confirmPassword}
                         type='password'
                         placeholder='Confirm Password'
-                        className={`w-full p-3 bg-zinc-200 dark:bg-zinc-700 rounded-md border-0 shadow-md outline-none transition-all ${
-                            formFieldErrors.confirmPassword?.length > 0 || (formData.password && formData.password !== formData.confirmPassword) ? '!border !border-red-400 dark:!border-red-500 text-red-600 dark:text-red-500' : ''}
-                        `}
+                        onChange={handleFieldChange}
+                        value={formData.confirmPassword}
+                        error={formFieldErrors.confirmPassword?.length > 0}
                     />
                     {formFieldErrors.confirmPassword?.length > 0 && <p className='text-red-500'>{formFieldErrors.confirmPassword?.join(' ')}</p>}
                 </div>
