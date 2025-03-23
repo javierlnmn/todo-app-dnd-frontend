@@ -7,8 +7,9 @@ import LoadingThrobberIcon from "@common/icons/LoadingThrobberIcon";
 import { TodoStatus } from "@todos/enums/todos.d";
 import { createTodo, updateTodo } from "@todos/services/todos";
 import { getTodoStatusKey } from "@todos/utils/todos";
-import { User } from "@/auth/types/user";
-import { getUsersList } from "@/auth/services/user";
+
+import { User } from "@auth/types/user";
+import { getUsersList } from "@auth/services/user";
 
 
 export interface TodoFormData {

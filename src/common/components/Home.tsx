@@ -1,6 +1,9 @@
 import { toast } from "react-toastify";
-import CrownIcon from "../icons/CrownIcon";
-import ToggleDarkModeButtons from "./ToggleDarkModeButtons";
+
+import CrownIcon from "@icons/CrownIcon";
+
+import ToggleDarkModeButtons from "@common/components/ToggleDarkModeButtons";
+
 
 const Home = () => {
 
